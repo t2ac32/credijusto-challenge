@@ -8,6 +8,8 @@ import datetime
 from enum import Enum
 from flask import jsonify, request, make_response
 from functools import wraps
+from bs4 import BeautifulSoup
+
 import globals
 
 
@@ -126,8 +128,71 @@ def bmx_USD_MXN():
     return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for lates USD to MXN currency exchange rate.</p>"
 
 
+@app.route("/dof", methods=["GET"])
+def dof_USD_MXN():
+    """
+    Query for latest exchange rate USD TO MXN from Diario oficial de la federacion.
+
+    Parameters:
+
+    Raises:
+        ApiError: status code for request
+    Returns:
+        resp(dictionary): A dictionary containing the json response from API
+    """
+    URL = globals.DOF_URL
+    page = rq.get(URL)
+
+    soup = BeautifulSoup(page.content, "html.parser")
+    data_table = soup.find_all("td", class_="b5")
+
+    if len(data_table) == 1:
+
+        data_rows = data_table[0].find_all("tr")
+        for row in data_rows:
+
+            if row.get("class") and row.get("class")[0] == "renglonNon":
+                # get first cel for each row
+                row_cells = row.find_all("td")
+                row_date = row_cells[0].text
+                fix_val = row_cells[1].text
+                dof_val = row_cells[2].text
+                pagos_val = row_cells[3].text
+                if (
+                    all(v is not None for v in [row_date, fix_val, dof_val, pagos_val])
+                    is not None
+                ):
+
+                    row_date = " ".join(row_date.split())
+                    fix_val = " ".join(fix_val.split())
+                    dof_val = " ".join(dof_val.split())
+                    pagos_val = " ".join(pagos_val.split())
+
+                    dateTime = datetime.datetime.strptime(row_date, "%d/%m/%Y")
+
+                    if dateTime == datetime.datetime.today().replace(
+                        second=0, hour=0, minute=0, microsecond=0
+                    ):
+                        print("date is today")
+                        print(
+                            f"fecha: {dateTime} \n",
+                            f"fix: {fix_val} \n",
+                            f"Diario oficil de la Federacion: {dof_val} \n",
+                            f"Pagos: {pagos_val}\n",
+                        )
+    else:
+        print("Web format has change and cannot be parsed")
+
+    # get second row of table corresponding to Today date
+
+    return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for lates USD to MXN currency exchange rate.</p>"
+
+
 # fixer_USD_MXN()
 # bmx_USD_MXN()
-
+dof_USD_MXN()
+"""
 if __name__ == "__main__":
+
     app.run(debug=True)
+"""

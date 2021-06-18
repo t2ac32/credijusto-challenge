@@ -1,8 +1,10 @@
 import importlib
 
 
-# DOF_URL =
-# BANXICO_URL =
+"""
+Diario oficial de la nacion
+"""
+DOF_URL = "https://www.banxico.org.mx/tipcamb/tipCamMIAction.do"
 
 
 """""" """
