@@ -33,11 +33,24 @@ for standarization of the testing services. This services allow to create multip
 where an instance of that service can be used to replicate what production services look like. 
 
 # Production test plan:
+Based on what was explained above the next test pipeline diagram demonstrates the general idea of the ***production deployment pipeline***.   
 
 ![Test Plan to production](/images/high_levelproposition.png)
 
-
+### Tests proposition
+- server connection check
+- database response check
+- client data check
+- client parameters check
+- model response time
+- model output validation
 
 
 ### The Low level problem
+- create env
+- consume fixer service
+- consume banxico
+- SOAP?
+- webscrapping 'Diario de la federacion
+
 ### The Scenario problem
