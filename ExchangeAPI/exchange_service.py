@@ -91,7 +91,12 @@ def fixer_USD_MXN():
     if resp.status_code != 200:
         raise ApiError("GET /tasks/ {}".format(resp.status_code))
     print(resp.json())
-    return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for lates USD to MXN currency exchange rate.</p>"
+    date = resp.json()["date"]
+    value = resp.json()["rates"]["MXN"]
+    return {
+        "last_updated": date,
+        "value": value,
+    }
 
 
 @app.route("/bmx", methods=["GET"])
@@ -122,10 +127,13 @@ def bmx_USD_MXN():
     if resp.status_code != 200:
         raise ApiError("GET /tasks/ {}".format(resp.status_code))
     # get exchange rate from reponse json
+    date = resp.json()["bmx"]["series"][0]["datos"][0]["fecha"]
     ex_rate = resp.json()["bmx"]["series"][0]["datos"][0]["dato"]
-    # TODO: Delete unessary print replace for api pretty print
-    print(f"BANXICO EXCHANGE RATE: {ex_rate}")
-    return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for lates USD to MXN currency exchange rate.</p>"
+
+    return {
+        "last_updated": date,
+        "value": ex_rate,
+    }
 
 
 @app.route("/dof", methods=["GET"])
@@ -173,13 +181,11 @@ def dof_USD_MXN():
                     if dateTime == datetime.datetime.today().replace(
                         second=0, hour=0, minute=0, microsecond=0
                     ):
-                        print("date is today")
-                        print(
-                            f"fecha: {dateTime} \n",
-                            f"fix: {fix_val} \n",
-                            f"Diario oficil de la Federacion: {dof_val} \n",
-                            f"Pagos: {pagos_val}\n",
-                        )
+
+                        return {
+                            "last_updated": dateTime,
+                            "value": dof_val,
+                        }
     else:
         print("Web format has change and cannot be parsed")
 
@@ -188,11 +194,18 @@ def dof_USD_MXN():
     return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for lates USD to MXN currency exchange rate.</p>"
 
 
+@app.route("/rates", methods=["GET"])
+def get_rates():
+    prov1 = fixer_USD_MXN()
+    prov2 = bmx_USD_MXN()
+    prov3 = dof_USD_MXN()
+    providers = [prov1, prov2, prov3]
+    rates = {"rates": {"providers": providers}}
+    return rates
+
+
 # fixer_USD_MXN()
 # bmx_USD_MXN()
-dof_USD_MXN()
-"""
+# dof_USD_MXN()
 if __name__ == "__main__":
-
     app.run(debug=True)
-"""
