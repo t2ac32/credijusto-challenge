@@ -13,24 +13,25 @@ import globals
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
-app.config["SECRET_KEY"] = "secretkey"
+app.config["SECRET_KEY"] = "appsecret"
 
 # Create decoratod for token protected routes
-def token_require(f):
+def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         token = request.args.get(
             "token"
         )  # http://localhost:500/route?token='Theuser generated token'
-
         if not token:
-            return jsonify({"message": "Token is missing!"}), 403
+            return jsonify({"message": "Token is missing!"}), 401
         # verify the token is valid
         try:
-            data = jwt.decode(token, app.config["SECRET_KEY"]), 403
+            data = jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"])
         except:
-            return jsonify({"message": "Token is not valid!"})
+            return jsonify({"message": "Token is not valid!"}), 401
         return f(*args, **kwargs)
+
+    return decorated
 
 
 class Currencies(Enum):
@@ -44,8 +45,9 @@ def unprotected():
 
 
 @app.route("/protected")
+@token_required
 def protected():
-    return jsonify({"message": "Route only available with valid tokens"})
+    return jsonify({"message": "Route only available with valid tokens."})
 
 
 @app.route("/")
@@ -56,20 +58,20 @@ def login():
     """
     auth = request.authorization
 
-    if auth and auth.password == "pass":
+    if auth and auth.password == "appsecret":
         token = jwt.encode(
             {
                 "user": auth.username,
                 "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=15),
             },
             app.config["SECRET_KEY"],
+            algorithm="HS256",
         )
-
-        # return token to the user after successfull log in
+        print(token)
         return jsonify({"token": token})
 
     return make_response(
-        "Could not verify!", 401, {"WWW-Authenticate": 'Basic realm="Login Required" '}
+        "Could not verify!", 401, {"WWW-Authenticate": 'Basic realm="Login Required"'}
     )
 
 
