@@ -20,7 +20,7 @@ Banxico
 """ """"""
 BMX_URL = "https://www.banxico.org.mx/SieAPIRest/service/v1/"
 BMX_TOKEN = "691ad5611a5cb5041f9c5203da920c32ff1f207c3d58dbad1b3d8146af372829"
-BMX_QUERY = "token={BMX_TOKEN}}"
+BMX_QUERY = f"token={BMX_TOKEN}"
 
 # Banxico PATHS
 BMX_SERIES = "series/"
