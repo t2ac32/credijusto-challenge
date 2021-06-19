@@ -83,3 +83,16 @@ http://localhost:49155/dof
 
 
 ### The Scenario problem
+
+The scenario clear shows a case of ONE-WAY dependency. The fact that problems come up in production on the other team changes means that my team code is not being tested by the other team before production deployment.
+
+The first thing i would do is to analyze with my team the main features that break on the other team changes.
+With this in mind i will try to talk to the othe tech lead and try to reach an agreement on which of our features they can and need to add test cases into their code. 
+
+Most of the time this type of cases result from resistance from teams to adapt to external test case since this result in less liberty for their team.
+Nevertheless it is always necessary to reach an agreement on how much freedom of implementation a team can have without considering other teams.
+
+The main response I anticipate to have from the other team is some rejection to implement test cases for our code. A solution to this could be to propose a list of development constraints for future implementations. They could test over this constrains and constrains will not be change unless an agreement is reached by both teams and team leads.
+
+A more General/LongTerm solution: **Remove dependencies**
+Implement a gate keeping strategy, where new stories with dependencies get blocked. Until dependencies are removed if possible.
