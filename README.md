@@ -1,8 +1,16 @@
 # Origination Group Technical Challenge
 
 
+# 8 hours mark note
+## Incomplete points
+- The Fixer services is not giving USD/MXN rates since free accounts block the base rate to EURO. 
+- Theres a bug when decoding app token, this blocks me from finishing the app token task.
+- API User rate limit: I have to dig more onto this since i've never done it. 
+- Heroku deployment Unfinished
 
-## The high level problem
+
+
+# The high level problem
 
 
 ## Proposition
@@ -46,7 +54,7 @@ Based on what was explained above the next test pipeline diagram demonstrates th
 - model output validation
 
 
-### The Low level problem
+# The Low level problem
 
 **How to run**
 Docker:
@@ -82,7 +90,7 @@ http://localhost:49155/dof
 - notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
 
 
-### The Scenario problem
+# The Scenario problem
 
 The scenario clear shows a case of ONE-WAY dependency. The fact that problems come up in production on the other team changes means that my team code is not being tested by the other team before production deployment.
 
@@ -96,3 +104,5 @@ The main response I anticipate to have from the other team is some rejection to 
 
 A more General/LongTerm solution: **Remove dependencies**
 Implement a gate keeping strategy, where new stories with dependencies get blocked. Until dependencies are removed if possible.
+
+
