@@ -69,6 +69,8 @@ Docker:
    user: appsecret
    pass: appsecret
    ```
+- This will return an app token that can be used on query urls (instructions below).
+
 Python:
 - App uses flask simply running exchange_service.py will run a local host on port 5000
 cd to project folder
