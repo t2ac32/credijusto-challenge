@@ -50,7 +50,18 @@ Based on what was explained above the next test pipeline diagram demonstrates th
 
 **How to run**
 Docker:
-- 
+- Go to project folder
+- from terminal run:
+    ```
+      docker-compose up 
+    ```
+- Enter http://localhost:5000/ in a browser to see the application running. 
+- If this doesn’t resolve, you can also try http://127.0.0.1:5000
+ - It will ask for user and password to get a token:
+   ```
+   user: appsecret
+   pass: appsecret
+   ```
 Python:
 - App uses flask simply running exchange_service.py will run a local host on port 5000
 cd to project folder
