@@ -47,10 +47,28 @@ Based on what was explained above the next test pipeline diagram demonstrates th
 
 
 ### The Low level problem
-- create env
-- consume fixer service
-- consume banxico
-- SOAP?
-- webscrapping 'Diario de la federacion
+
+**How to run**
+Docker:
+- 
+Python:
+- App uses flask simply running exchange_service.py will run a local host on port 5000
+cd to project folder
+python exchange_service.py
+On browser: go to 127.0.0.1:5000/
+
+## GET RATES (from providers)
+http://localhost:49155/rates
+- notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
+## GET RATES (from fixer)
+http://localhost:49155/fixer
+- notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
+## GET RATES (from BANXICO )
+http://localhost:49155/bmx
+- notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
+## GET RATES (from Diario oficial de la federacion )
+http://localhost:49155/dof
+- notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
+
 
 ### The Scenario problem
