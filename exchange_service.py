@@ -68,6 +68,7 @@ def login():
 
 
 @app.route("/fixer", methods=["GET"])
+@token_required
 def fixer_USD_MXN():
     """
     Query for lates exchange rate of FIXER USD TO MXN.
@@ -95,6 +96,7 @@ def fixer_USD_MXN():
 
 
 @app.route("/bmx", methods=["GET"])
+@token_required
 def bmx_USD_MXN():
     """
     Query for lates exchange rate of BANXICO USD TO MXN.
@@ -132,6 +134,7 @@ def bmx_USD_MXN():
 
 
 @app.route("/dof", methods=["GET"])
+@token_required
 def dof_USD_MXN():
     """
     Query for latest exchange rate USD TO MXN from Diario oficial de la federacion.
