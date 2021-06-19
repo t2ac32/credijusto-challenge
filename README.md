@@ -4,7 +4,6 @@
 # 8 hours mark note
 ## Incomplete points
 - The Fixer services is not giving USD/MXN rates since free accounts block the base rate to EURO. 
-- Theres a bug when decoding app token, this blocks me from finishing the app token task.
 - API User rate limit: I have to dig more onto this since i've never done it. 
 - Heroku deployment Unfinished
 
@@ -80,13 +79,13 @@ On browser: go to 127.0.0.1:5000/
 http://localhost:49155/rates
 - notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
 ## GET RATES (from fixer)
-http://localhost:49155/fixer
+http://localhost:49155/fixer?token=user_token
 - notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
 ## GET RATES (from BANXICO )
-http://localhost:49155/bmx
+http://localhost:49155/bmx?=user_token
 - notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
 ## GET RATES (from Diario oficial de la federacion )
-http://localhost:49155/dof
+http://localhost:49155/dof?token=user_token
 - notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
 
 
