@@ -88,7 +88,7 @@ http://localhost:49155/fixer?token=user_token
 ## GET RATES (from BANXICO ) :fire: [token protected] :fire:
 http://localhost:49155/bmx?=user_token
 - notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
-## GET RATES (from Diario oficial de la federacion ) :fire: [token protected] :fire
+## GET RATES (from Diario oficial de la federacion ) :fire: [token protected] :fire:
 http://localhost:49155/dof?token=user_token
 - notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
 
