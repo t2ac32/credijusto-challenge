@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@500&family=Source+Code+Pro&display=swap"
+    rel="stylesheet">
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  <div class="container">
+    <!--Main Navigation-->
+    <main class="container" aria-label="Content">
+      <div class="div-background"></div>
+      <div class="content" style="width: 100%; height: 100%;">
+        <div class="row div-home" style="margin-top: 4 0px;">
+          <div class="col text-center" style="">
+            <div class="container ">
+              <div class="container" style="margin-top: 45px;">
+                <img class="img_avatar img-fluid" src="../static/img/closeBW.jpg" />
+                <div class="container blackLine"></div>
+                <div class="container katakanaFont" style="color: white;">
+                  <p>今後: Machine Learning Engineer • 過去: iOS Dev </p>
+                </div>
+              </div>
+              <div class="container" style="width: 40%; margin-top: 25px;">
+                <div class="row mb-3">
+                  <div class="container" style="font-family: 'Encode Sans Condensed', sans-serif; color:yellowgreen">
+                    Your
+                    user apptoken
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class=" w-100" style="font-family: 'Source Code Pro', monospace; color: white;">
+                    <div class="container text-justify " style="font-size: small; word-wrap:break-word">
+                      {{value}}
+                    </div>
+                  </div>
+                  <!--
+                      <div class="w-50" style="">
+                        <button type="button" class="btn btn-light" style="height: 100%; width: 100%;"></button>
+                      </div>
+                      -->
+                </div>
+
+                <div class="row mt-3">
+                  <form method='post' action="/rates">
+                    <button type="submit" name='button' value="fixer"
+                      class="btn btn-secondary btn-lg w-100 provider-button">Daily Report
+                    </button>
+                  </form>
+                </div>
+
+                <div class=" row mt-3">
+                  <div class="container w-100">
+                    <form method='post' action="/submit_provider">
+                      <div class="row mt-3">
+                        <button type="submit" name='button' value="fixer"
+                          class="btn btn-secondary btn-lg w-100 provider-button">Fixer
+                          test</button>
+                      </div>
+                      <div class="row mt-3">
+                        <button type="submit" name='button' value="dof"
+                          class="btn btn-secondary btn-lg w-100 provider-button">Diario
+                          oficial de la
+                          nacion</button>
+                      </div>
+                      <div class="row mt-3">
+                        <button type="submit" name='button' value="bmx"
+                          class="btn btn-secondary btn-lg w-100 provider-button">Banxico</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

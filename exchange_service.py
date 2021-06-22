@@ -1,3 +1,6 @@
+from re import L, template
+import sys, os, pathlib
+from pathlib import Path
 import importlib
 import flask
 from flask import config
@@ -6,16 +9,20 @@ import requests as rq
 import jwt
 import datetime
 from enum import Enum
-from flask import jsonify, request, make_response
+from flask import jsonify, request, make_response, render_template
+from flask import session, flash
 from functools import wraps
 from bs4 import BeautifulSoup
 
 from globals import globals
 
 
-app = flask.Flask(__name__)
+app = flask.Flask(
+    __name__, template_folder="site/templates", static_folder="site/static"
+)
 app.config["DEBUG"] = True
 app.config["SECRET_KEY"] = "appsecret"
+cwd = os.getcwd()
 
 # Create decoratod for token protected routes
 def token_required(f):
@@ -24,8 +31,12 @@ def token_required(f):
         token = request.args.get(
             "token"
         )  # http://localhost:500/route?token='Theuser generated token'
+
+        if session.get("logged_in"):
+            return f(*args, **kwargs)
         if not token:
             return jsonify({"message": "Token is missing!"}), 401
+
         # verify the token is valid
         try:
             data = jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"])
@@ -51,6 +62,7 @@ def login():
     auth = request.authorization
 
     if auth and auth.password == "appsecret":
+        session["logged_in"] = True
         token = jwt.encode(
             {
                 "user": auth.username,
@@ -59,12 +71,17 @@ def login():
             app.config["SECRET_KEY"],
             algorithm="HS256",
         )
-        print(token)
-        return jsonify({"token": token})
+        return render_template("index.html", value=token)
+        # return jsonify({"token": token})
 
     return make_response(
         "Could not verify!", 401, {"WWW-Authenticate": 'Basic realm="Login Required"'}
     )
+
+
+def logout():
+    session["logged_in"] = False
+    return render_template("404.html")
 
 
 @app.route("/fixer", methods=["GET"])
@@ -192,7 +209,7 @@ def dof_USD_MXN():
     return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for lates USD to MXN currency exchange rate.</p>"
 
 
-@app.route("/rates", methods=["GET"])
+@app.route("/rates", methods=["GET", "POST"])
 def get_rates():
     prov1 = fixer_USD_MXN()
     prov2 = bmx_USD_MXN()
@@ -200,6 +217,20 @@ def get_rates():
     providers = [prov1, prov2, prov3]
     rates = {"rates": {"providers": providers}}
     return rates
+
+
+@app.route("/submit_provider", methods=["POST"])
+def submit_provider():
+    if session.get("logged_in"):
+        if request.method == "POST":
+            if request.form["button"] == "fixer":
+                return fixer_USD_MXN()
+            elif request.form["button"] == "dof":
+                return dof_USD_MXN()
+            elif request.form["button"] == "bmx":
+                return bmx_USD_MXN()
+    else:
+        return jsonify({"message": "Session ended, log in to continue!"}), 401
 
 
 # fixer_USD_MXN()

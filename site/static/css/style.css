@@ -1,0 +1,99 @@
+html {
+
+background-color: black;
+overflow-y: hidden;
+overflow-x: hidden;
+}
+* {
+box-sizing: border-box;
+}
+body { 
+    background-color: black;
+    
+}
+
+.div-background { 
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url("../img/background/stock.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: 100%;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-position: center ;
+    /* Add the blur effect */
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+    z-index: 0;
+    display: block;
+}
+.error-page { 
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url("../img/404-anime.png"); no-repeat center cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: blue;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
+    
+    z-index: 0;
+    display: block;
+}
+
+.blur-filter{
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+.content {
+    scroll-behavior: auto;
+    position: relative ;
+    left: 0;
+    right: 0;
+}
+
+.img_avatar {
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    src: url("../img/backgrounds/aquarium.jpg");
+    
+}
+
+*.unselectable {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+ 
+    /*
+      Introduced in Internet Explorer 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
+ }
+
+
+ /* Rows and columns style */
+ .top-buffer { margin-top:20px; }
+
+
+.btn-secondary {
+    background-color: rgb(78, 156, 129) !important;
+}

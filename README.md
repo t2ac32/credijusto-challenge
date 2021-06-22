@@ -1,5 +1,7 @@
 # Origination Group Technical Challenge
 
+![UI screenshot](/images/ui_screenshot.png)
+
 
 # 8 hours mark note
 ## Incomplete points
