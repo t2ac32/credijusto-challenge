@@ -1,4 +1,4 @@
-# Origination Group Technical Challenge
+# Credijusto Technical Challenge
 
 ![UI screenshot](/images/ui_screenshot.png)
 
