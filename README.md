@@ -57,7 +57,7 @@ Based on what was explained above the next test pipeline diagram demonstrates th
 
 # The Low level problem
 
-**How to run**
+## **How to run / Instructions**
 Docker:
 - Go to project folder
 - from terminal run:
@@ -79,16 +79,16 @@ cd to project folder
 python exchange_service.py
 On browser: go to 127.0.0.1:5000/
 
-## GET RATES (from providers)
+## GET RATES (from providers) [unprotected]
 http://localhost:49155/rates
 - notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
-## GET RATES (from fixer)
+## GET RATES (from fixer) :fire: [token protected] :fire:
 http://localhost:49155/fixer?token=user_token
 - notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
-## GET RATES (from BANXICO )
+## GET RATES (from BANXICO ) :fire: [token protected] :fire:
 http://localhost:49155/bmx?=user_token
 - notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
-## GET RATES (from Diario oficial de la federacion )
+## GET RATES (from Diario oficial de la federacion ) :fire: [token protected] :fire
 http://localhost:49155/dof?token=user_token
 - notes: fixer (provider0) free account doesnt allow to choose base as USD, defaul base EUR
 
